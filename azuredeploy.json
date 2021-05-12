@@ -119,7 +119,7 @@
 		"sonarCollation": "Latin1_General_100_CS_AS",
 		"appServiceName": "[parameters('projectName')]",
 		"sqlServerName": "[concat(parameters('projectName'), '-sql')]",
-		"databaseName": "[concat(parameters('projectName'), '-db')]",
+		"databaseName": "sonar",
         "WebAppName": "[parameters('projectName')]",
 		"applicationInsightsName": "[parameters('projectName')]"
 	},
@@ -190,23 +190,9 @@
                     ],
                     "properties": {
                         "alwaysOn": false,
-                        "javaVersion": "1.8",
+                        "javaVersion": "11",
                         "javaContainer": "TOMCAT",
                         "javaContainerVersion": "9.0"
-                    }
-                },
-                {
-                    "apiVersion": "2016-08-01",
-                    "name": "web",
-                    "type": "sourcecontrols",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Web/Sites', variables('WebAppName'))]",
-                        "[concat('Microsoft.Web/Sites/', variables('WebAppName'), '/config/web')]"
-                    ],
-                    "properties": {
-                        "RepoUrl": "[parameters('repoUrl')]",
-                        "branch": "[parameters('branch')]",
-                        "IsManualIntegration": true
                     }
                 }
             ]
